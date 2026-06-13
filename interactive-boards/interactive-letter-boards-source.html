@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Kidova KidsFest Interactive Letter Boards</title>
+<style>
+@page{size:letter landscape;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:#132142}
+.board{width:11in;height:8.5in;position:relative;overflow:hidden;page-break-after:always;padding:.34in .42in;background:#fffaf0}
+.brand{height:.42in;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:4}
+.brand img{height:.38in;width:auto;object-fit:contain}
+.eyebrow{display:inline-block;border:3px solid #132142;border-radius:99px;padding:5px 12px;background:#bdff43;font-size:15px;font-weight:900;letter-spacing:.03em}
+h1{font-size:43px;line-height:.95;letter-spacing:-.045em;margin:.12in 0 .07in;font-weight:950}
+.sub{font-size:17px;line-height:1.25;margin:0;max-width:8.6in}
+.instruction{font-weight:900}
+.footer{position:absolute;left:.42in;right:.42in;bottom:.18in;display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:800;z-index:5}
+.badge{position:absolute;width:1.38in;height:1.38in;border-radius:50%;object-fit:cover;border:4px solid #132142;background:#fff;z-index:4}
+.road{position:absolute;height:.65in;border:5px solid #132142;border-radius:99px;background:#bdff43;transform:rotate(-8deg)}
+.road:after{content:"";position:absolute;left:18px;right:18px;top:50%;border-top:4px dashed #17627b;transform:translateY(-50%)}
+
+/* Sticky-note prompt */
+.sticky-board{background:linear-gradient(150deg,#fffaf0 0 66%,#d9f5ff 66%)}
+.sticky-board .badge{right:.42in;top:.72in}
+.sticky-board h1{max-width:8.6in}
+.scene-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.12in;margin-top:.25in;position:relative;z-index:3}
+.scene{height:2.45in;border:4px solid #132142;border-radius:19px;padding:.12in;background:#fff;box-shadow:5px 5px 0 #132142;display:flex;flex-direction:column;align-items:center;text-align:center}
+.scene:nth-child(1){background:#57d5f7}.scene:nth-child(2){background:#ffd954}.scene:nth-child(3){background:#ff8b59}.scene:nth-child(4){background:#bdff43}.scene:nth-child(5){background:#aabaff}.scene:nth-child(6){background:#ff82b6}
+.scene svg{width:1.05in;height:1.05in;stroke:#132142;stroke-width:6;fill:none;stroke-linecap:round;stroke-linejoin:round;margin:.03in 0}
+.scene h2{font-size:16px;line-height:1.05;margin:3px 0;font-weight:950}
+.scene p{font-size:10px;line-height:1.12;margin:1px 0;font-weight:700}
+.sticky-prompt{position:absolute;left:.42in;right:.42in;bottom:.5in;height:1.18in;border:4px solid #132142;border-radius:20px;background:#fff;padding:.15in .2in;display:flex;align-items:center;gap:.22in;box-shadow:5px 5px 0 #132142;z-index:4}
+.sticky-note{width:.86in;height:.86in;background:#ffd954;border:3px solid #132142;transform:rotate(-5deg);display:grid;place-items:center;font-size:36px;font-weight:950}
+.sticky-prompt h2{font-size:23px;margin:0 0 3px}.sticky-prompt p{font-size:14px;margin:0}
+
+/* Portrait board */
+.portrait-board{background:linear-gradient(145deg,#eef2ff 0 64%,#bdff43 64%)}
+.portrait-board .badge{right:.45in;top:.72in;width:1.32in;height:1.32in}
+.portrait-board h1{max-width:8.2in}
+.portrait-board .road{width:5.2in;right:-.5in;bottom:.55in;background:#ff78ad;transform:rotate(-18deg)}
+.faces{display:grid;grid-template-columns:repeat(4,1.55in);gap:.22in .32in;margin-top:.27in;position:relative;z-index:3}
+.face{aspect-ratio:1;border:4px solid #132142;border-radius:50%;background:#fff;position:relative}
+.face:before{content:"";position:absolute;left:20%;right:20%;top:47%;border-top:2px dashed #b9c0d1}
+.face:after{content:"";position:absolute;top:20%;bottom:20%;left:50%;border-left:2px dashed #b9c0d1}
+.face:nth-child(1),.face:nth-child(8){background:#fff7d1}.face:nth-child(4),.face:nth-child(11){background:#e7fbff}
+.hero-cue{margin-top:.18in;display:flex;gap:.12in;align-items:center;position:relative;z-index:3}
+.cue{border:3px solid #132142;border-radius:99px;background:#fff;padding:7px 13px;font-size:13px;font-weight:900}
+
+/* Parent dot-vote */
+.vote-board{background:linear-gradient(155deg,#fffaf0 0 72%,#57d5f7 72%)}
+.vote-board .badge{right:.43in;top:.72in;width:1.22in;height:1.22in}
+.vote-board h1{max-width:8.5in}
+.questions{margin-top:.2in;display:grid;gap:.13in;position:relative;z-index:3}
+.question{display:grid;grid-template-columns:2.9in 1fr;border:4px solid #132142;border-radius:18px;background:#fff;overflow:hidden;box-shadow:5px 5px 0 #132142;min-height:1.43in}
+.qtext{padding:.14in .17in;display:flex;align-items:center;background:#eef2ff;font-size:17px;line-height:1.1;font-weight:950}
+.answers{display:grid;grid-template-columns:repeat(3,1fr)}
+.answer{border-left:3px solid #132142;padding:.1in;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px}
+.answer:nth-child(1){background:#bdff43}.answer:nth-child(2){background:#ffd954}.answer:nth-child(3){background:#ff9b88}
+.answer strong{font-size:15px;line-height:1.05}.answer small{font-size:9px;line-height:1.1;font-weight:700}
+.dot-zone{width:.62in;height:.36in;border:2px dashed #132142;border-radius:99px;background:rgba(255,255,255,.55)}
+.vote-note{font-size:11px;font-weight:800;margin-top:.12in}
+</style>
+</head>
+<body>
+
+<section class="board sticky-board">
+  <div class="brand"><img src="assets/kidova-logo-cropped.png"><img src="assets/cs3-wordmark.svg"></div>
+  <span class="eyebrow">KIDS + GROWN-UPS · WRITE ONE STICKY NOTE</span>
+  <h1>What makes the trip to school hard?</h1>
+  <p class="sub">Think about a real day. <span class="instruction">Write or draw one challenge, then add it to the big board.</span></p>
+  <img class="badge" src="../Route_Hero_Badge_V3_Final_Color_Review.png">
+  <div class="scene-grid">
+    <div class="scene">
+      <svg viewBox="0 0 100 100"><path d="M18 75h64M25 75V40h50v35M18 62l32-35 32 35M36 75V58h28v17"/></svg>
+      <h2>Getting out the door</h2><p>Late starts, missing things, busy mornings</p>
+    </div>
+    <div class="scene">
+      <svg viewBox="0 0 100 100"><path d="M18 73h64M23 73l18-42h18l18 42M33 58h34M38 46h24"/></svg>
+      <h2>Crossing streets</h2><p>Fast cars, long waits, hard-to-see corners</p>
+    </div>
+    <div class="scene">
+      <svg viewBox="0 0 100 100"><rect x="18" y="27" width="64" height="48" rx="10"/><path d="M28 38h44M31 75v8M69 75v8M29 63h8M63 63h8"/></svg>
+      <h2>Bus or subway</h2><p>Delays, crowds, missed stops, changes</p>
+    </div>
+    <div class="scene">
+      <svg viewBox="0 0 100 100"><path d="M22 76c6-35 18-50 30-50 13 0 20 20 27 50M32 60h37M42 44h18"/><path d="M18 76h64"/></svg>
+      <h2>Walking or biking</h2><p>Sidewalks, bike lanes, distance, hills</p>
+    </div>
+    <div class="scene">
+      <svg viewBox="0 0 100 100"><path d="M27 71c-12-8-8-25 5-27 2-17 29-21 36-5 17 1 20 25 4 32zM31 82l7-7M50 82l7-7M69 82l7-7"/></svg>
+      <h2>Weather</h2><p>Rain, heat, cold, snow, dark mornings</p>
+    </div>
+    <div class="scene">
+      <svg viewBox="0 0 100 100"><path d="M20 75c15-15 16-38 34-44 12-4 17 8 26 6M20 75h16M71 37h9v9"/><circle cx="20" cy="75" r="6"/><circle cx="54" cy="31" r="6"/></svg>
+      <h2>Something else</h2><p>Getting lost, feeling worried, changing plans</p>
+    </div>
+  </div>
+  <div class="sticky-prompt"><div class="sticky-note">?</div><div><h2>Finish this sentence:</h2><p><b>“My trip would be easier or safer if…”</b> Please do not include a child’s name, school, address, or exact route.</p></div></div>
+  <div class="footer"><span>Kidova @ NYC KidsFest</span><span>Anonymous community activity</span></div>
+</section>
+
+<section class="board portrait-board">
+  <div class="brand"><img src="assets/kidova-logo-cropped.png"><img src="assets/cs3-wordmark.svg"></div>
+  <span class="eyebrow">KIDS · PICK A CIRCLE + DRAW</span>
+  <h1>What does your Route Hero look like?</h1>
+  <p class="sub">Draw yourself, a helper, or an imaginary hero who makes journeys safer.</p>
+  <img class="badge" src="../Route_Hero_Badge_V3_Final_Color_Review.png">
+  <div class="faces">
+    <div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div>
+    <div class="face"></div><div class="face"></div><div class="face"></div><div class="face"></div>
+  </div>
+  <div class="hero-cue"><span class="cue">Add a superpower</span><span class="cue">Add a travel tool</span><span class="cue">Add a safe-route symbol</span><span class="cue">Write your hero name</span></div>
+  <div class="road"></div>
+  <div class="footer"><span>Kidova Route Hero Gallery</span><span>Draw with markers · No real names needed</span></div>
+</section>
+
+<section class="board vote-board">
+  <div class="brand"><img src="assets/kidova-logo-cropped.png"><img src="assets/cs3-wordmark.svg"></div>
+  <span class="eyebrow">GROWN-UPS · PLACE ONE DOT IN EACH ROW</span>
+  <h1>How ready is your family for independent travel?</h1>
+  <p class="sub">Answer based on your child’s current age and everyday environment. There are no right answers.</p>
+  <img class="badge" src="../Route_Hero_Badge_V3_Final_Color_Review.png">
+  <div class="questions">
+    <div class="question">
+      <div class="qtext">Does your child currently travel without an adult?</div>
+      <div class="answers">
+        <div class="answer"><strong>Often</strong><small>Regular trips independently</small><div class="dot-zone"></div></div>
+        <div class="answer"><strong>Sometimes</strong><small>Short trips or with friends</small><div class="dot-zone"></div></div>
+        <div class="answer"><strong>Not yet</strong><small>Usually with an adult</small><div class="dot-zone"></div></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="qtext">Would you like them to travel more independently?</div>
+      <div class="answers">
+        <div class="answer"><strong>Yes</strong><small>They seem ready</small><div class="dot-zone"></div></div>
+        <div class="answer"><strong>Maybe, with support</strong><small>Tools, practice, or community help</small><div class="dot-zone"></div></div>
+        <div class="answer"><strong>Not right now</strong><small>Not a current goal</small><div class="dot-zone"></div></div>
+      </div>
+    </div>
+    <div class="question">
+      <div class="qtext">How safe does your neighborhood feel for children traveling?</div>
+      <div class="answers">
+        <div class="answer"><strong>Mostly safe</strong><small>Most everyday trips feel manageable</small><div class="dot-zone"></div></div>
+        <div class="answer"><strong>It depends</strong><small>Some places or times feel safe</small><div class="dot-zone"></div></div>
+        <div class="answer"><strong>Not safe enough</strong><small>Important barriers remain</small><div class="dot-zone"></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="vote-note">These anonymous dots help Kidova understand the gap between children’s current independence, caregivers’ goals, and neighborhood conditions.</p>
+  <div class="footer"><span>Kidova @ NYC KidsFest</span><span>No names, schools, addresses, exact routes, or live locations</span></div>
+</section>
+
+</body>
+</html>

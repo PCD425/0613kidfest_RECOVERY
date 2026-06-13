@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kidova KidsFest Family Activity</title>
+  <style>
+    :root{--ink:#152345;--blue:#3155ff;--cyan:#57d8ff;--lime:#c8ff55;--sun:#ffd84e;--pink:#ff77aa;--paper:#f7f8ff;--white:#fff}
+    *{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 0,#dffaff,transparent 30%),var(--paper)}
+    button,input,select,textarea{font:inherit}.shell{max-width:980px;margin:auto;padding:20px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.logo{font-size:30px;font-weight:900;letter-spacing:-2px}.logo b{color:var(--blue)}
+    .pill{display:inline-block;padding:8px 13px;border:2px solid var(--ink);border-radius:999px;background:var(--lime);font-weight:800}.hero{margin:18px 0;padding:32px;border:3px solid var(--ink);border-radius:28px;background:var(--white);box-shadow:8px 8px 0 var(--ink);position:relative;overflow:hidden}
+    .hero:after{content:"";position:absolute;width:150px;height:150px;border:22px dotted var(--cyan);border-radius:50%;right:-45px;top:-45px}.hero h1{font-size:clamp(42px,8vw,78px);line-height:.95;letter-spacing:-4px;margin:10px 0;max-width:750px}.hero p{font-size:20px;max-width:650px}.actions,.choices{display:flex;flex-wrap:wrap;gap:12px}
+    button{border:3px solid var(--ink);border-radius:16px;padding:15px 20px;background:var(--white);font-weight:900;cursor:pointer;box-shadow:4px 4px 0 var(--ink)}button:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}button.primary{background:var(--blue);color:white}.card{background:white;border:3px solid var(--ink);border-radius:22px;padding:24px;margin:20px 0;box-shadow:6px 6px 0 var(--ink)}
+    .screen{display:none}.screen.active{display:block}.route{display:grid;grid-template-columns:repeat(5,1fr);align-items:center;margin:30px 0}.stop{background:var(--cyan);border:3px solid var(--ink);border-radius:50%;width:50px;height:50px;display:grid;place-items:center;font-weight:900}.line{height:8px;background:var(--ink)}.broken{background:repeating-linear-gradient(90deg,var(--pink) 0 12px,transparent 12px 22px)}
+    .choice{flex:1;min-width:220px;text-align:left;min-height:90px}.good{background:var(--lime)!important}.bad{background:#ffdce8!important}.kid-feedback{font-size:18px;line-height:1.35;border-radius:16px}.kid-feedback.good-feedback{background:#efffd5;border-left-color:#78ba00}.kid-feedback.risk-feedback{background:#fff1f5;border-left-color:var(--pink)}.kid-feedback strong{font-size:20px}.kid-question{font-size:21px;line-height:1.35}.big{font-size:32px}.progress{height:15px;border:2px solid var(--ink);border-radius:20px;overflow:hidden;background:white}.progress span{display:block;height:100%;background:var(--blue);width:0;transition:.3s}
+    label{display:block;font-weight:900;margin:18px 0 8px}.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.scale button{padding:12px}.selected{background:var(--sun)!important}input,select,textarea{width:100%;padding:13px;border:2px solid var(--ink);border-radius:12px;background:white}small{display:block;margin-top:8px}.note{background:#e8faff;border-left:7px solid var(--blue);padding:14px;margin:15px 0}.hidden{display:none}.footer{text-align:center;padding:25px;font-weight:700}.kid-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.mascot{width:100%;max-height:330px}.badge{display:block;width:min(420px,90%);margin:18px auto}.color-card{background:#fff;border:3px dashed var(--ink);border-radius:22px;padding:18px}.color-card svg{width:100%;max-height:300px}
+    .resource-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:20px 0}.resource{background:white;border:3px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:5px 5px 0 var(--ink);display:flex;flex-direction:column}.resource img{width:100%;aspect-ratio:4/3;object-fit:contain;border-bottom:3px solid var(--ink);background:#eef2ff}.resource-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}.resource h3{font-size:22px;margin:0}.resource p{margin:0;line-height:1.3;flex:1}.resource button{width:100%;padding:12px}.demo-card{background:linear-gradient(135deg,var(--blue),#162b9b);color:white;border:3px solid var(--ink);border-radius:24px;padding:24px;margin:20px 0;box-shadow:7px 7px 0 var(--ink)}.demo-card h2{font-size:34px;margin:5px 0}.demo-card button{background:var(--lime);color:var(--ink)}.figma-frame{display:block;width:100%;height:min(76vh,760px);min-height:520px;border:3px solid var(--ink);border-radius:22px;background:white;box-shadow:6px 6px 0 var(--ink);margin:18px 0}
+    @media(max-width:700px){.top{flex-wrap:wrap}.hero{padding:22px}.hero h1{font-size:38px;letter-spacing:-2px;overflow-wrap:anywhere}.card{padding:18px}.route{grid-template-columns:50px 1fr 50px 1fr 50px}.hide-mobile{display:none}.scale button{padding:10px 3px}.shell{padding:12px;overflow:hidden}.kid-grid{grid-template-columns:1fr}.kid-grid>*{min-width:0}.choices{display:grid;grid-template-columns:1fr;width:100%}.choice{width:100%;min-width:0}.resource-grid{grid-template-columns:1fr}.footer{overflow-wrap:anywhere}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <div class="top"><div class="logo">KID<b>O</b>VA</div><span class="pill">Kidova @ KidsFest</span></div>
+  <section id="home" class="screen active">
+    <div class="hero"><span class="pill">A family safety activity</span><h1>Can you help make everyday journeys safer?</h1><p>Kids can color and make one simple safety choice while grown-ups share feedback about real family journeys.</p><div class="actions"><button class="primary" onclick="show('kids')">Kids: color + choose</button><button onclick="show('survey')">Grown-ups: quick survey</button></div></div>
+    <div class="card"><div class="big">Familiar route + unexpected change = a hard moment.</div><p>Kidova turns real-time city information into one clear next step for a child, and a calm shared view for their grown-up.</p><div class="actions"><button onclick="openDemo()">Open Kidova demo</button></div></div>
+  </section>
+
+  <section id="kids" class="screen">
+    <div class="card"><span class="pill">Kids' activity · about 2 minutes</span><h2 class="big">Meet Safe Route Buddy!</h2>
+      <div class="kid-grid"><img class="mascot" src="assets/kidova-safe-route-buddy.svg" alt="Kidova Safe Route Buddy cartoon"><div><p class="kid-question"><b>My usual way is blocked, and I am not sure where to go. What should I do first?</b></p><div class="choices"><button class="choice" onclick="kidChoice(this,'rush')">I rush ahead and try to find the way alone</button><button class="choice" onclick="kidChoice(this,'safe')">I pause somewhere safe and visible</button><button class="choice" onclick="kidChoice(this,'crowd')">I follow the biggest crowd</button></div></div></div>
+      <div id="kidFeedback" class="note kid-feedback hidden"></div><div class="actions"><button id="kidRetry" class="hidden" onclick="retryKidChoice()">Try again</button><button id="kidFinish" class="primary hidden" onclick="show('kidThanks')">See my badge</button></div>
+      <p><b>At the table:</b> Ask for a street-safety coloring sheet while your grown-up completes the survey.</p>
+    </div>
+  </section>
+
+  <section id="kidThanks" class="screen"><div class="hero"><span class="pill">Great safety choice!</span><h1>You are a Route Hero.</h1><img class="badge" src="assets/route-hero-badge.png" alt="Kidova Route Hero digital badge"><p>Show this screen to receive a sticker or coloring sheet at the Kidova table.</p><div class="actions"><button onclick="show('home')">Finish</button><button onclick="show('survey')">Bring grown-up to survey</button></div></div></section>
+
+  <section id="survey" class="screen">
+    <div class="card"><span class="pill">Caregiver survey · about 5 minutes · anonymous</span><h2 class="big">Help us learn whether families truly need this.</h2><p>You can explore Kidova and try the prototype before or during the survey.</p><div class="actions"><button type="button" onclick="show('explore')">Explore Kidova + try the demo</button></div><div class="progress"><span id="bar"></span></div>
+      <form id="form">
+        <label>1. How old is the child you are here with?</label><select name="age" required onchange="progress()"><option value="">Choose one</option><option>Under 5</option><option>5–8</option><option>9–11</option><option>12–14</option><option>15+</option></select>
+        <label>2. How often does this child travel without an adult?</label><select name="independence" required onchange="progress()"><option value="">Choose one</option><option>Never</option><option>Less than monthly</option><option>1–3 times a month</option><option>1–3 times a week</option><option>Almost every day</option></select>
+        <label>3. In the past 6 months, how many times did an unexpected route change cause a real problem?</label><select name="incident_frequency" required onchange="progress()"><option value="">Choose one</option><option>None</option><option>Once</option><option>2–3 times</option><option>4–6 times</option><option>More than 6 times</option><option>Not sure</option></select>
+        <label>4. Think about the most recent time. What actually happened?</label><select name="last_incident" required onchange="progress()"><option value="">Choose one</option><option>No recent incident</option><option>Transit delay, reroute, or missed stop</option><option>Child got lost or confused</option><option>Child could not reach an adult</option><option>Unsafe street, traffic, or weather condition</option><option>Adult had to leave work / change plans</option><option>Other</option></select>
+        <label>5. What did your family use or do?</label><select name="current_solution" required onchange="progress()"><option value="">Choose one</option><option>Called or texted the child</option><option>Used Find My / Life360 / location sharing</option><option>Contacted school, transit staff, or another adult</option><option>Child solved it alone using maps/transit app</option><option>Adult went to pick up the child</option><option>We did not have a good solution</option><option>No recent incident</option></select>
+        <label>6. How well did that solution work?</label><div class="scale" data-name="current_solution_score"><button type="button" onclick="pick(this,'current_solution_score')">1</button><button type="button" onclick="pick(this,'current_solution_score')">2</button><button type="button" onclick="pick(this,'current_solution_score')">3</button><button type="button" onclick="pick(this,'current_solution_score')">4</button><button type="button" onclick="pick(this,'current_solution_score')">5</button></div><small>1 = failed us · 5 = completely solved it</small>
+        <div class="note"><b>Now consider this concept:</b> Kidova detects when a familiar journey changes, gives the child one clear next step, and shows their grown-up the same situation.</div>
+        <label>7. Compared with what you use today, is this meaningfully better?</label><select name="relative_value" required onchange="progress()"><option value="">Choose one</option><option>Much better</option><option>A little better</option><option>About the same</option><option>Worse</option><option>I do not need this</option></select>
+        <label>8. Which single part creates the most value?</label><select name="top_value" required onchange="progress()"><option value="">Choose one</option><option>Clear instruction for the child</option><option>Detecting a meaningful route change</option><option>Safe place where the child can pause</option><option>Calm shared context for the grown-up</option><option>Verified nearby human support</option><option>None of these</option></select>
+        <label>9. What is your biggest reason NOT to use Kidova?</label><select name="dealbreaker" required onchange="progress()"><option value="">Choose one</option><option>Privacy or location-data concerns</option><option>Wrong advice or false alerts</option><option>Child becoming dependent on an app</option><option>Too complicated or distracting</option><option>Cost</option><option>My current solution is enough</option><option>No major concern</option></select>
+        <label>10. When should Kidova alert the grown-up?</label><select name="alert_threshold" required onchange="progress()"><option value="">Choose one</option><option>Every unusual change, even if low-risk</option><option>Only when the child may need to decide or act</option><option>Only when Kidova recommends a route change</option><option>Only when the child asks for help</option><option>Emergency situations only</option></select>
+        <label>11. What would show that Kidova is learning and improving?</label><select name="learning_signal" required onchange="progress()"><option value="">Choose one</option><option>Fewer unnecessary alerts</option><option>Faster, clearer instructions</option><option>Less need for the grown-up to intervene</option><option>Better route suggestions over time</option><option>Child feels more confident</option></select>
+        <label>12. Which real next step would you take?</label><select name="commitment" required onchange="progress()"><option value="">Choose one</option><option>Try a free 4-week pilot through my child's school</option><option>Try a free family pilot directly</option><option>Join a waitlist, but not pilot yet</option><option>Only learn more</option><option>Probably do nothing</option></select>
+        <label>13. If it worked reliably, who should pay?</label><select name="payer" required onchange="progress()"><option value="">Choose one</option><option>School or school district</option><option>City / public agency</option><option>Family subscription</option><option>Employer or insurance benefit</option><option>It should always be free</option><option>I would not use it</option></select>
+        <label>14. If your family paid, what feels reasonable per month?</label><select name="price" required onchange="progress()"><option value="">Choose one</option><option>$0</option><option>$1–5</option><option>$6–10</option><option>$11–20</option><option>More than $20</option><option>Not sure</option></select>
+        <label>What would have to be true for you to trust it?</label><textarea name="trust" rows="3" placeholder="Tell us the proof, control, partnership, or privacy protection you would need." oninput="progress()"></textarea>
+        <div class="note"><b>Privacy promise:</b> This event prototype does not ask for a child's name, school, home address, or live location.</div>
+        <button id="surveySubmit" class="primary" type="submit">Finish survey</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="thanks" class="screen"><div class="hero"><span class="pill">Mission complete</span><h1>Thank you, Route Hero.</h1><p>Your answers help us decide what Kidova should build, who it should serve, and whether families truly need it.</p><div id="submissionStatus" class="note"></div><div class="actions"><button class="primary" onclick="show('explore')">Explore Kidova + try the demo</button><button onclick="show('pilot')">Optional: join pilot list</button><button onclick="show('home')">Start next family</button><button onclick="exportCSV()">Staff: export survey CSV</button></div></div></section>
+
+  <section id="explore" class="screen">
+    <div class="card"><span class="pill">Interactive prototype</span><h2 class="big">Try the Kidova demo</h2><p>Explore how Kidova could support a child and grown-up when a familiar route changes.</p><iframe class="figma-frame" src="https://embed.figma.com/proto/FkB5b8UKclkKgqiBkCPh5y/KIDOVA-prototype?node-id=493-6&p=f&viewport=125%2C213%2C0.12&scaling=scale-down&content-scaling=fixed&starting-point-node-id=493%3A6&show-proto-sidebar=1&page-id=493%3A5&embed-host=share" title="Kidova interactive Figma prototype" allowfullscreen></iframe><div class="actions"><button onclick="show('survey')">Share feedback</button></div></div>
+    <div class="hero"><span class="pill">Explore more</span><h1>Discover the Kidova world.</h1><p>See the updated KidsFest posters, meet Route Hero, and continue the activity at home.</p></div>
+    <div class="resource-grid">
+      <article class="resource"><img src="posters/updated/poster-1.png" alt="Kidova colorful route poster"><div class="resource-body"><h3>Help shape safer journeys</h3><p>A quick introduction to the KidsFest family activity.</p><button onclick="openExternal('posters/updated/Kidova_Updated_Posters.pdf')">Open updated posters</button></div></article>
+      <article class="resource"><img src="posters/updated/poster-2.png" alt="Kidova child at a changing route poster"><div class="resource-body"><h3>When the route changes</h3><p>See the everyday moment Kidova is designed to support.</p><button onclick="openExternal('posters/updated/Kidova_Updated_Posters.pdf')">Open updated posters</button></div></article>
+      <article class="resource"><img src="Route_Hero_Badge_V3_Final_Color_Review.png" alt="Route Hero badge"><div class="resource-body"><h3>Meet Route Hero</h3><p>Celebrate a safe choice with the official KidsFest digital badge.</p><button onclick="openExternal('Route_Hero_Badge_V3_Final_Color_Review.png')">View badge</button></div></article>
+      <article class="resource"><img src="Route_Hero_Badge_V3_Final_Coloring_Page.png" alt="Route Hero coloring page"><div class="resource-body"><h3>Color your own hero</h3><p>Continue the Route Hero activity after KidsFest.</p><button onclick="openExternal('Route_Hero_Badge_V3_Final_Coloring_Page.png')">Open coloring page</button></div></article>
+    </div>
+    <div class="actions"><button onclick="show('pilot')">Interested in a future pilot?</button><button onclick="show('home')">Back to start</button></div>
+  </section>
+  <section id="pilot" class="screen"><div class="card"><span class="pill">Separate optional form</span><h2 class="big">Interested in a future pilot?</h2><p>This contact information is stored separately from your survey answers.</p><form id="pilotForm"><label>Email</label><input type="email" name="email" required placeholder="you@example.com"><label>Preferred opportunity</label><select name="pilot_type" required><option value="">Choose one</option><option>Family pilot</option><option>School-connected pilot</option><option>Research interview only</option></select><button id="pilotSubmit" class="primary" type="submit">Submit pilot interest</button></form><div id="pilotStatus" class="note hidden"></div><button onclick="exportPilots()">Staff: export pilot contacts CSV</button></div></section>
+  <div class="footer">Kidova · Making kids' everyday journeys safer and easier</div>
+</main>
+<script>
+  const COLLECTOR_URL='https://script.google.com/macros/s/AKfycbyXzQxI9z5hUbe1MzkoB6vWZw2w-HCyobWFmUTMTthEkcgbnrbOOO63k38G5lVkvTQcKA/exec';
+  const responses=JSON.parse(localStorage.getItem('kidovaKidsfestResponses')||'[]'); const pilotLeads=JSON.parse(localStorage.getItem('kidovaPilotLeads')||'[]'); const pending=JSON.parse(localStorage.getItem('kidovaPendingSubmissions')||'[]'); const scaleValues={};
+  const surveyForm=document.getElementById('form'),pilotForm=document.getElementById('pilotForm');
+  function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
+  function openExternal(url){window.open(url,'_blank','noopener,noreferrer')}
+  function openDemo(){show('explore')}
+  const kidFeedbackCopy={
+    rush:'<strong>That could put me in more danger.</strong><br>If I rush ahead alone, I might get farther from the route I know, miss a crossing signal, or become harder for my grown-up to find. I should stop and choose a safer first step.',
+    crowd:'<strong>A crowd may look like it knows the way, but it may be going somewhere else.</strong><br>Following it could lead me to the wrong exit, and I should never let an unknown person lead me away. I should pause where I am safe and easy to see.',
+    safe:'<strong>Great safety choice!</strong><br>Pausing somewhere safe and visible gives me time to look around, check with Safe Route Buddy, and contact a trusted grown-up.'
+  };
+  async function kidChoice(el,choice){
+    const ok=choice==='safe';
+    document.querySelectorAll('#kids .choice').forEach(x=>x.disabled=true);el.classList.add(ok?'good':'bad');
+    kidFeedback.classList.remove('hidden','good-feedback','risk-feedback');kidFeedback.classList.add(ok?'good-feedback':'risk-feedback');kidFeedback.innerHTML=kidFeedbackCopy[choice];
+    kidFinish.classList.toggle('hidden',!ok);kidRetry.classList.toggle('hidden',ok);
+    const data={submission_id:submissionId(),timestamp:new Date().toISOString(),selected_choice:el.textContent.trim(),choice_key:choice,choice_safe:String(ok),completed:String(ok)};
+    await sendOrQueue({type:'kids_activity',data});
+  }
+  function retryKidChoice(){
+    document.querySelectorAll('#kids .choice').forEach(x=>{x.disabled=false;x.classList.remove('good','bad')});
+    kidFeedback.classList.add('hidden');kidRetry.classList.add('hidden');kidFinish.classList.add('hidden');
+  }
+  function pick(el,name){el.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');scaleValues[name]=el.textContent;progress()}
+  function progress(){let f=surveyForm,filled=[...f.querySelectorAll('select')].filter(x=>x.value).length+Object.keys(scaleValues).length+(f.trust.value?1:0),total=f.querySelectorAll('select').length+2;bar.style.width=Math.min(100,filled/total*100)+'%'}
+  function submissionId(){return crypto.randomUUID?crypto.randomUUID():'kidova-'+Date.now()+'-'+Math.random().toString(36).slice(2)}
+  function savePending(){localStorage.setItem('kidovaPendingSubmissions',JSON.stringify(pending))}
+  async function sendSubmission(item){
+    const body=new URLSearchParams({payload:JSON.stringify(item)});
+    await fetch(COLLECTOR_URL,{method:'POST',mode:'no-cors',body});
+  }
+  async function sendOrQueue(item){
+    try{await sendSubmission(item);return true}
+    catch(error){pending.push(item);savePending();return false}
+  }
+  async function retryPending(){
+    if(!pending.length||!navigator.onLine)return;
+    const retry=[...pending];pending.length=0;
+    for(const item of retry){try{await sendSubmission(item)}catch(error){pending.push(item)}}
+    savePending();
+  }
+  surveyForm.addEventListener('submit',async e=>{
+    e.preventDefault();if(!scaleValues.current_solution_score)return alert('Please rate how well the current solution worked.');
+    surveySubmit.disabled=true;surveySubmit.textContent='Submitting...';
+    let data=Object.fromEntries(new FormData(surveyForm));Object.assign(data,scaleValues);data.submission_id=submissionId();data.timestamp=new Date().toISOString();
+    responses.push(data);localStorage.setItem('kidovaKidsfestResponses',JSON.stringify(responses));
+    const sent=await sendOrQueue({type:'survey',data});
+    submissionStatus.innerHTML=sent?'<b>Response submitted.</b> Your anonymous answers were sent to the Kidova research sheet.':'<b>Saved on this device.</b> The response will retry automatically when the internet connection returns.';
+    surveyForm.reset();Object.keys(scaleValues).forEach(k=>delete scaleValues[k]);bar.style.width='0';surveySubmit.disabled=false;surveySubmit.textContent='Finish survey';show('thanks');
+  });
+  pilotForm.addEventListener('submit',async e=>{
+    e.preventDefault();pilotSubmit.disabled=true;pilotSubmit.textContent='Submitting...';
+    let data=Object.fromEntries(new FormData(pilotForm));data.submission_id=submissionId();data.timestamp=new Date().toISOString();
+    pilotLeads.push(data);localStorage.setItem('kidovaPilotLeads',JSON.stringify(pilotLeads));
+    const sent=await sendOrQueue({type:'pilot',data});
+    pilotStatus.classList.remove('hidden');pilotStatus.innerHTML=sent?'<b>Pilot interest submitted.</b> Thank you!':'<b>Saved on this device.</b> It will retry when the internet connection returns.';
+    pilotForm.reset();pilotSubmit.disabled=false;pilotSubmit.textContent='Submit pilot interest';
+  });
+  function downloadCSV(rows,name){if(!rows.length)return alert('No records yet.');let keys=[...new Set(rows.flatMap(Object.keys))],cell=v=>'"'+String(v??'').replaceAll('"','""')+'"',csv=[keys.map(cell).join(','),...rows.map(r=>keys.map(k=>cell(r[k])).join(','))].join('\n'),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=name;a.click()}
+  function exportCSV(){downloadCSV(responses,'kidova-anonymous-survey.csv')}
+  function exportPilots(){downloadCSV(pilotLeads,'kidova-pilot-contacts.csv')}
+  window.addEventListener('online',retryPending);retryPending();
+  if(location.hash&&document.querySelector(location.hash+'.screen'))show(location.hash.slice(1));
+</script>
+</body>
+</html>

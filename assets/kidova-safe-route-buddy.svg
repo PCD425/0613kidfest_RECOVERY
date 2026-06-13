@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Kidova Safe Route Buddy cartoon">
+  <defs><style>.o{stroke:#152345;stroke-width:22;stroke-linecap:round;stroke-linejoin:round}</style></defs>
+  <circle cx="400" cy="400" r="368" fill="#c8ff55" class="o"/>
+  <path d="M170 620c80-68 151-96 230-96s150 28 230 96" fill="#57d8ff" class="o"/>
+  <rect x="258" y="155" width="284" height="390" rx="86" fill="#3155ff" class="o"/>
+  <rect x="300" y="205" width="200" height="230" rx="78" fill="#fff" class="o"/>
+  <circle cx="400" cy="270" r="42" fill="#ff77aa" class="o"/>
+  <circle cx="400" cy="365" r="42" fill="#ffd84e" class="o"/>
+  <path d="M338 486c38 33 86 33 124 0" fill="none" class="o"/>
+  <path d="M258 325l-82 56m366-56 82 56M290 548l-48 110m268-110 48 110" fill="none" class="o"/>
+  <path d="M145 375l33 6-11-32m488 26-33 6 11-32" fill="#fff" class="o"/>
+  <path d="M325 153c18-58 132-58 150 0" fill="#57d8ff" class="o"/>
+  <path d="M365 85h70" fill="none" class="o"/>
+  <circle cx="250" cy="675" r="24" fill="#fff" class="o"/>
+  <circle cx="550" cy="675" r="24" fill="#fff" class="o"/>
+</svg>
